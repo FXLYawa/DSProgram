@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-#include "..//Header//Algorithm.h"
 #include "..//Header//Exception.h"
 #include "..//Header//FILEOperation.h"
 #include "..//Header//Huffman.h"
@@ -82,12 +81,16 @@ double Compress(std::string file_name) {
     std::cout << "开始文件压缩" << std::endl;
     Huffman tree(res);
     CpFileBitcount = tree.GetCompressedFile(program_path + "\\Input\\" + file_name, program_path + "\\Result\\" + file_name);
-    std::cout << "压缩完成,结果存储在 " +file_name << std::endl;
+    std::cout << "压缩完成,结果存储在 " + file_name << std::endl;
     return (double)SourceBitCount / CpFileBitcount;
 }
 void Decompress(std::string file_name) {
     // TODO
 }
 void Compare(std::string first_file_path, std::string second_file_path) {
-    // TODO
+    unsigned long long first = File_Readers::gethash(first_file_path), second = File_Readers::gethash(first_file_path);
+    if (first == second)
+        std::cout << "来份文件内容相同" << std::endl;
+    else
+        std::cout << "来份文件内容相同" << std::endl;
 }

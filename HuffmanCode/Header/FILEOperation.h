@@ -15,8 +15,9 @@
 
 namespace File_Readers {
     typedef unsigned char info;
+    const unsigned long long hash=0x1F351F35;
     std::map<info, int> SourceFileCount(std::string);
-    
+    unsigned long long gethash(std::string); 
 };  // namespace File_Readers
 
 #endif  // READFILE_READFILE_FXLY
