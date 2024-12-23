@@ -9,12 +9,16 @@
 #include <string>
 #include <vector>
 
+#include "..//Header//Algorithm.h"
+#include "..//Header//Exception.h"
+#include "..//Header//FILEOperation.h"
+#include "..//Header//Huffman.h"
+
 // 程序所在路径(初始化使用
 const std::string program_path{"E:\\work_tool\\document\\school\\DSProgram\\HuffmanCode"};
 
-
 double Compress(std::string);
-void Decompress(std::string, std::string);
+void Decompress(std::string);
 void Compare(std::string, std::string);
 
 int main() {
@@ -32,8 +36,8 @@ int main() {
             std::cout << "请输入您要压缩的文件名字:";
             std::string s;
             std::cin >> s;
-            double res=Compress(s);
-            std::cout<<"该文件的压缩率为:"<<res<<std::endl;
+            double res = Compress(s);
+            std::cout << "该文件的压缩率为:" << res << std::endl;
         } else if (choice == 2) {
             std::cout << "请输入您要解压的文件名字:";
             std::string s;
@@ -57,7 +61,29 @@ int main() {
 }
 
 double Compress(std::string file_name) {
-    // TODO
+    int SourceBitCount = 0, CpFileBitcount = 0;
+    std::cout << "正在统计词频" << std::endl;
+    auto res = File_Readers::SourceFileCount(program_path + "\\Input\\" + file_name);
+    std::string name;
+    for (auto c : file_name) {
+        if (c == '.')
+            break;
+        else
+            name.push_back(c);
+    }
+    std::ofstream fout(program_path + "\\Result\\" + name + ".csv", std::ios::out | std::ios::binary);
+    assert(fout.good());
+    for (auto &t : res) {
+        fout << t.first << "," << t.second << '\n';
+        SourceBitCount += t.second;
+    }
+    fout.close();
+    std::cout << "统计完成,结果存储在 " + name + ".csv" << std::endl;
+    std::cout << "开始文件压缩" << std::endl;
+    Huffman tree(res);
+    CpFileBitcount = tree.GetCompressedFile(program_path + "\\Input\\" + file_name, program_path + "\\Result\\" + file_name);
+    std::cout << "压缩完成,结果存储在 " +file_name << std::endl;
+    return (double)SourceBitCount / CpFileBitcount;
 }
 void Decompress(std::string file_name) {
     // TODO
