@@ -48,10 +48,8 @@ int main() {
             std::string a, b;
             std::cout << "文件1:";
             std::cin >> a;
-            std::cout << std::endl;
             std::cout << "文件2:";
             std::cin >> b;
-            std::cout << std::endl;
             Compare(a, b);
         }else if(choice==4){
             std::cout << "请输入您要查看的文件名字(后缀名为csv):";
@@ -111,7 +109,7 @@ void Decompress(std::string file_name) {
 void Compare(std::string first_file_path, std::string second_file_path) {
     unsigned long long first = File_Readers::gethash(first_file_path), second = File_Readers::gethash(second_file_path);
     if (first == second)
-        std::cout << "来份文件内容相同" << std::endl;
+        std::cout << "两份文件内容相同" << std::endl;
     else
-        std::cout << "来份文件内容相同" << std::endl;
+        std::cout << "两份文件内容不同" << std::endl;
 }

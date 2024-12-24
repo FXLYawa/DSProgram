@@ -58,14 +58,17 @@ int Huffman::GetCompressedFile(std::string source_file, std::string result_file)
     Cryption::EnCryption cryp;
     while (fin) {
         c = fin.get();
-        if(c==EOF&&fin.peek()==EOF)break;
+        if (c == EOF && fin.peek() == EOF) break;
         std::string s = mp[c];
         for (auto t : s)
             if (cryp.push(t == '1')) fout << cryp.get(), CpFileBitcount++;
     }
+    info cnt = 0;
+    while (!cryp.push(0)) cnt++;
+    fout << cryp.get() << cnt;
     fin.close();
     fout.close();
-    return CpFileBitcount;
+    return CpFileBitcount + 2;
 }
 
 void Huffman::GetDeCompressedFile(std::string source_file, std::string result_file) {
@@ -75,13 +78,23 @@ void Huffman::GetDeCompressedFile(std::string source_file, std::string result_fi
     assert(fout.good());
     char c;
     Cryption::DeCryption cryp;
+    std::queue<info> q;
+    q.push(fin.get());
+    q.push(fin.get());
     while (fin) {
-        char c=fin.get();
-        char t = cryp.get(c);
-        if(c==EOF&&fin.peek()==EOF)break;
+        char c = fin.get();
+        if (c == EOF && fin.peek() == EOF) break;
+        info t = cryp.get(q.front());
+        q.pop();
+        q.push(c);
         for (int i = 7; ~i; i--)
             if (move((t >> i) & 1)) fout << get();
     }
+    info t = cryp.get(q.front());
+    q.pop();
+    int cnt = q.front();
+    for (int i = 7; i != cnt - 1; i--)
+        if (move((t >> i) & 1)) fout << get();
     fin.close();
     fout.close();
 }

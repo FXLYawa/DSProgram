@@ -527,4 +527,4 @@ OPHELIA
 And you yourself shall keep the key of it.
 LAERTES
 Farewell.
-Exitr
+Exit
