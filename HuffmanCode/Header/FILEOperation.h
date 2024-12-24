@@ -18,6 +18,8 @@ namespace File_Readers {
     const unsigned long long hash=0x1F351F35;
     std::map<info, int> SourceFileCount(std::string);
     unsigned long long gethash(std::string); 
+    std::map<info, int> CSVFileRead(std::string);
+    void ShowTypeCount(std::string);
 };  // namespace File_Readers
 
 #endif  // READFILE_READFILE_FXLY

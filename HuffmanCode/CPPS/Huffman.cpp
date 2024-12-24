@@ -35,7 +35,7 @@ Huffman::Huffman(std::map<info, int> data_weight) {
         q.pop();
         q.push(tmp);
     }
-    root = q.top()[2];
+    root = pos = q.top()[2];
     dfs(root, "");
 }
 
@@ -56,7 +56,9 @@ int Huffman::GetCompressedFile(std::string source_file, std::string result_file)
     assert(fout.good());
     char c;
     Cryption::EnCryption cryp;
-    while ((c = fin.get()) != EOF) {
+    while (fin) {
+        c = fin.get();
+        if(c==EOF&&fin.peek()==EOF)break;
         std::string s = mp[c];
         for (auto t : s)
             if (cryp.push(t == '1')) fout << cryp.get(), CpFileBitcount++;
@@ -64,4 +66,36 @@ int Huffman::GetCompressedFile(std::string source_file, std::string result_file)
     fin.close();
     fout.close();
     return CpFileBitcount;
+}
+
+void Huffman::GetDeCompressedFile(std::string source_file, std::string result_file) {
+    std::ifstream fin(source_file, std::ios::in | std::ios::binary);
+    std::ofstream fout(result_file, std::ios::out | std::ios::binary);
+    assert(fin.good());
+    assert(fout.good());
+    char c;
+    Cryption::DeCryption cryp;
+    while (fin) {
+        char c=fin.get();
+        char t = cryp.get(c);
+        if(c==EOF&&fin.peek()==EOF)break;
+        for (int i = 7; ~i; i--)
+            if (move((t >> i) & 1)) fout << get();
+    }
+    fin.close();
+    fout.close();
+}
+
+bool Huffman::move(bool way) {
+    if (way)
+        pos = rson[pos];
+    else
+        pos = lson[pos];
+    return lson[pos] + rson[pos] == 0;
+}
+
+unsigned char Huffman::get() {
+    info res = value[pos];
+    pos = root;
+    return res;
 }

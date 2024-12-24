@@ -28,7 +28,7 @@ namespace Cryption {
         }
         info get() {
             info res = pos = 0;
-            for (int i = 0; i < 8; i++) res = (res << 1) & a[i];
+            for (int i = 0; i < 8; i++) res = (res << 1) | a[i];
             return res ^ (info)rnd();
         }
     };
