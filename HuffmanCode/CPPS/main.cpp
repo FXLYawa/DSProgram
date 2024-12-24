@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-#include "..//Header//Exception.h"
 #include "..//Header//FILEOperation.h"
 #include "..//Header//Huffman.h"
 
@@ -58,7 +57,6 @@ int main() {
             File_Readers::ShowTypeCount(program_path + "\\Result\\" + s);
         } else {
             std::cout << "感谢您的使用,再见!\nmade by \\FXLY_awa/" << std::endl;
-            std::cout << "文件1:";
             break;
         }
     }

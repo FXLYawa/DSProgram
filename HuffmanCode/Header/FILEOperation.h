@@ -11,7 +11,6 @@
 #include <vector>
 
 #include "..//Header//Huffman.h"
-#include "Exception.h"
 
 namespace File_Readers {
     typedef unsigned char info;

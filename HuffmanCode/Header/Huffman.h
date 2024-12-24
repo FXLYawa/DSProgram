@@ -9,8 +9,6 @@
 #include <string>
 #include <vector>
 
-#include "Exception.h"
-
 class Huffman {
     typedef unsigned char info;  // information
    private:
