@@ -15,7 +15,7 @@ std::map<unsigned char, int> File_Readers::SourceFileCount(std::string file_path
     std::ifstream fin(file_path, std::ios::in | std::ios::binary);
     assert(fin.good());
     char c;
-    while ((c = fin.get()) != EOF) res[c]++;
+    while (fin) res[fin.get()]++;
     fin.close();
     return res;
 }

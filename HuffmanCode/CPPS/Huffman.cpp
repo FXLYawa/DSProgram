@@ -58,7 +58,7 @@ int Huffman::GetCompressedFile(std::string source_file, std::string result_file)
     Cryption::EnCryption cryp;
     while (fin) {
         c = fin.get();
-        if (c == EOF && fin.peek() == EOF) break;
+        if (c == EOF && fin.peek() == EOF && !fin) break;
         std::string s = mp[c];
         for (auto t : s)
             if (cryp.push(t == '1')) fout << cryp.get(), CpFileBitcount++;
@@ -83,7 +83,7 @@ void Huffman::GetDeCompressedFile(std::string source_file, std::string result_fi
     q.push(fin.get());
     while (fin) {
         char c = fin.get();
-        if (c == EOF && fin.peek() == EOF) break;
+        if (c == EOF && fin.peek() == EOF && !fin) break;
         info t = cryp.get(q.front());
         q.pop();
         q.push(c);
