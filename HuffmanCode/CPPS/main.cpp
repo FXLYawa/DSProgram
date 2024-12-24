@@ -28,7 +28,7 @@ int main() {
                   << "2.解压文件" << std::endl
                   << "3.验证解压结果" << std::endl
                   << "4.查看编码字符统计" << std::endl
-                  << "5.退出程序"<<std::endl
+                  << "5.退出程序" << std::endl
                   << "请输入操作前的数字：";
         std::cin >> choice;
         if (choice == 1) {
@@ -50,7 +50,7 @@ int main() {
             std::cout << "文件2:";
             std::cin >> b;
             Compare(a, b);
-        }else if(choice==4){
+        } else if (choice == 4) {
             std::cout << "请输入您要查看的文件名字(后缀名为csv):";
             std::string s;
             std::cin >> s;

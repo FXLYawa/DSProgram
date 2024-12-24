@@ -25,7 +25,7 @@ std::map<unsigned char, int> File_Readers::SourceFileCount(std::string file_path
  * @return: 文件的hash值
  */
 unsigned long long File_Readers::gethash(std::string file_path) {
-    unsigned long long res=0;
+    unsigned long long res = 0;
     std::ifstream fin(file_path, std::ios::in | std::ios::binary);
     assert(fin.good());
     char c;
@@ -45,9 +45,9 @@ std::map<unsigned char, int> File_Readers::CSVFileRead(std::string file_path) {
     char c;
     int cnt = 0;
     // while ((c = fin.get()) != EOF) {
-    while(fin){
-        c=fin.get();
-        if(fin.get()!=',')break;
+    while (fin) {
+        c = fin.get();
+        if (fin.get() != ',') break;
         for (int i = 1; i <= 4; i++) cnt = (cnt << 8) + (unsigned char)fin.get();
         fin.get();
         res[c] = cnt;
@@ -55,17 +55,17 @@ std::map<unsigned char, int> File_Readers::CSVFileRead(std::string file_path) {
     return res;
 }
 
-void File_Readers::ShowTypeCount(std::string file_path){
+void File_Readers::ShowTypeCount(std::string file_path) {
     std::ifstream fin(file_path, std::ios::in | std::ios::binary);
     assert(fin.good());
     char c;
     int cnt = 0;
     // while ((c = fin.get()) != EOF) {
-    while(fin){
-        c=fin.get();
-        if(fin.get()!=',')break;
+    while (fin) {
+        c = fin.get();
+        if (fin.get() != ',') break;
         for (int i = 1; i <= 4; i++) cnt = (cnt << 8) + (unsigned char)fin.get();
         fin.get();
-        std::cout<<c<<","<<cnt<<std::endl;
+        std::cout << c << "," << cnt << std::endl;
     }
 }
